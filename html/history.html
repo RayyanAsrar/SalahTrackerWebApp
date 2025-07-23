@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en" class="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Salah Tracker - Prayer History</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            200: '#bae6fd',
+                            300: '#7dd3fc',
+                            400: '#38bdf8',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                            800: '#075985',
+                            900: '#0c4a6e',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @keyframes slideInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .animate-slide-in-down {
+            animation: slideInDown 0.6s ease-out;
+        }
+        .animate-fade-in-up {
+            animation: fadeInUp 0.8s ease-out 0.2s both;
+        }
+        .animate-fade-in-up-delayed {
+            animation: fadeInUp 0.8s ease-out 0.4s both;
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 dark:from-slate-900 dark:to-slate-800 transition-colors duration-300">
+    <!-- Navigation Bar -->
+    <nav class="bg-white dark:bg-slate-800 shadow-lg border-b border-slate-200 dark:border-slate-700 animate-slide-in-down">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Left: Quranic Verse -->
+                <div class="flex-1 min-w-0">
+                    <div class="text-sm text-slate-600 dark:text-slate-400 italic">
+                        <span class="hidden sm:inline">"And establish prayer and give zakah and bow with those who bow." - Al-Baqarah 2:43</span>
+                        <span class="sm:hidden">"And establish prayer..." - Al-Baqarah 2:43</span>
+                    </div>
+                </div>
+                
+                <!-- Right: User Info and Sign Out -->
+                <div class="flex items-center space-x-4">
+                    <div class="text-right">
+                        <p class="text-sm font-medium text-slate-800 dark:text-white">Ahmed Ali</p>
+                        <p class="text-xs text-slate-500 dark:text-slate-400">ahmed@example.com</p>
+                    </div>
+                    <button class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-200">
+                        Sign Out
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <!-- Page Header -->
+        <div class="mb-8 animate-fade-in-up">
+            <div class="bg-gradient-to-r from-primary-500 to-primary-600 rounded-xl px-6 py-4 shadow-lg">
+                <h1 class="text-2xl font-bold text-white text-center">Prayer History</h1>
+                <p class="text-primary-100 text-center mt-1">Track your spiritual journey over time</p>
+            </div>
+        </div>
+
+        <!-- History Table -->
+        <div class="bg-white dark:bg-slate-800 rounded-2xl shadow-xl border border-slate-200 dark:border-slate-700 overflow-hidden animate-fade-in-up-delayed">
+            <!-- Table Header -->
+            <div class="bg-slate-50 dark:bg-slate-700 px-6 py-4 border-b border-slate-200 dark:border-slate-600">
+                <h2 class="text-lg font-semibold text-slate-800 dark:text-white">Recent Prayer Records</h2>
+            </div>
+
+            <!-- Table Content -->
+            <div class="overflow-x-auto">
+                <table class="w-full">
+                    <thead class="bg-slate-100 dark:bg-slate-700">
+                        <tr>
+                            <th class="px-6 py-4 text-left text-xs font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wider">Date</th>
+                            <th class="px-6 py-4 text-center text-xs font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wider">Fajr</th>
+                            <th class="px-6 py-4 text-center text-xs font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wider">Dhuhr</th>
+                            <th class="px-6 py-4 text-center text-xs font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wider">Asr</th>
+                            <th class="px-6 py-4 text-center text-xs font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wider">Maghrib</th>
+                            <th class="px-6 py-4 text-center text-xs font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wider">Isha</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-200 dark:divide-slate-600">
+                        <!-- Row 1 -->
+                        <tr class="hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors duration-200">
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="text-sm font-medium text-slate-900 dark:text-white">22nd July 2025</div>
+                                <div class="text-sm text-slate-500 dark:text-slate-400">Yesterday</div>
+                            </td>
+                            <td class="px-6 py-4 text-center">
+                                <select class="px-3 py-1 bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-600 rounded text-sm text-slate-800 dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-transparent">
+                                    <option value="on-time" selected>On Time</option>
+                                    <option value="by-jamaat">By Jamaat</option>
+                                    <option value="missed">Missed</option>
+                                    <option value="qaza">Qaza</option>
+                                </select>
+                            </td>
+                            <td class="px-6 py-4 text-center">
+                                <select class="px-3 py-1 bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-600 rounded text-sm text-slate-800 dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-transparent">
+                                    <option value="on-time">On Time</option>
+                                    <option value="by-jamaat" selected>By Jamaat</option>
+                                    <option value="missed">Missed</option>
+                                    <option value="qaza">Qaza</option>
+                                </select>
+                            </td>
+                            <td class="px-6 py-4 text-center">
+                                <select class="px-3 py-1 bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-600 rounded text-sm text-slate-800 dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-transparent">
+                                    <option value="on-time" selected>On Time</option>
+                                    <option value="by-jamaat">By Jamaat</option>
+                                    <option value="missed">Missed</option>
+                                    <option value="qaza">Qaza</option>
+                                </select>
+                            </td>
+                            <td class="px-6 py-4 text-center">
+                                <select class="px-3 py-1 bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-600 rounded text-sm text-slate-800 dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-transparent">
+                                    <option value="on-time">On Time</option>
+                                    <option value="by-jamaat" selected>By Jamaat</option>
+                                    <option value="missed">Missed</option>
+                                    <option value="qaza">Qaza</option>
+                                </select>
+                            </td>
+                            <td class="px-6 py-4 text-center">
+                                <select class="px-3 py-1 bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-600 rounded text-sm text-slate-800 dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-transparent">
+                                    <option value="on-time">On Time</option>
+                                    <option value="by-jamaat">By Jamaat</option>
+                                    <option value="missed" selected>Missed</option>
+                                    <option value="qaza">Qaza</option>
+                                </select>
+                            </td>
+                        </tr>
+
+                        <!-- Row 2 -->
+                        <tr class="hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors duration-200">
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="text-sm font-medium text-slate-900 dark:text-white">21st July 2025</div>
+                                <div class="text-sm text-slate-500 dark:text-slate-400">2 days ago</div>
+                            </td>
+                            <td class="px-6 py-4 text-center">
+                                <select class="px-3 py-1 bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-600 rounded text-sm text-slate-800 dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-transparent">
+                                    <option value="on-time">On Time</option>
+                                    <option value="by-jamaat" selected>By Jamaat</option>
+                                    <option value="missed">Missed</option>
+                                    <option value="qaza">Qaza</option>
+                                </select>
+                            </td>
+                            <td class="px-6 py-4 text-center">
+                                <select class="px-3 py-1 bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-600 rounded text-sm text-slate-800 dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-transparent">
+                                    <option value="on-time" selected>On Time</option>
+                                    <option value="by-jamaat">By Jamaat</option>
+                                    <option value="missed">Missed</option>
+                                    <option value="qaza">Qaza</option>
+                                </select>
+                            </td>
+                            <td class="px-6 py-4 text-center">
+                                <select class="px-3 py-1 bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-600 rounded text-sm text-slate-800 dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-transparent">
+                                    <option value="on-time" selected>On Time</option>
+                                    <option value="by-jamaat">By Jamaat</option>
+                                    <option value="missed">Missed</option>
+                                    <option value="qaza">Qaza</option>
+                                </select>
+                            </td>
+                            <td class="px-6 py-4 text-center">
+                                <select class="px-3 py-1 bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-600 rounded text-sm text-slate-800 dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-transparent">
+                                    <option value="on-time" selected>On Time</option>
+                                    <option value="by-jamaat">By Jamaat</option>
+                                    <option value="missed">Missed</option>
+                                    <option value="qaza">Qaza</option>
+                                </select>
+                            </td>
+                            <td class="px-6 py-4 text-center">
+                                <select class="px-3 py-1 bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-600 rounded text-sm text-slate-800 dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-transparent">
+                                    <option value="on-time">On Time</option>
+                                    <option value="by-jamaat">By Jamaat</option>
+                                    <option value="missed">Missed</option>
+                                    <option value="qaza" selected>Qaza</option>
+                                </select>
+                            </td>
+                        </tr>
+
+                        <!-- Row 3 -->
+                        <tr class="hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors duration-200">
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="text-sm font-medium text-slate-900 dark:text-white">20th July 2025</div>
+                                <div class="text-sm text-slate-500 dark:text-slate-400">3 days ago</div>
+                            </td>
+                            <td class="px-6 py-4 text-center">
+                                <select class="px-3 py-1 bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-600 rounded text-sm text-slate-800 dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-transparent">
+                                    <option value="on-time" selected>On Time</option>
+                                    <option value="by-jamaat">By Jamaat</option>
+                                    <option value="missed">Missed</option>
+                                    <option value="qaza">Qaza</option>
+                                </select>
+                            </td>
+                            <td class="px-6 py-4 text-center">
+                                <select class="px-3 py-1 bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-600 rounded text-sm text-slate-800 dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-transparent">
+                                    <option value="on-time">On Time</option>
+                                    <option value="by-jamaat" selected>By Jamaat</option>
+                                    <option value="missed">Missed</option>
+                                    <option value="qaza">Qaza</option>
+                                </select>
+                            </td>
+                            <td class="px-6 py-4 text-center">
+                                <select class="px-3 py-1 bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-600 rounded text-sm text-slate-800 dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-transparent">
+                                    <option value="on-time">On Time</option>
+                                    <option value="by-jamaat" selected>By Jamaat</option>
+                                    <option value="missed">Missed</option>
+                                    <option value="qaza">Qaza</option>
+                                </select>
+                            </td>
+                            <td class="px-6 py-4 text-center">
+                                <select class="px-3 py-1 bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-600 rounded text-sm text-slate-800 dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-transparent">
+                                    <option value="on-time" selected>On Time</option>
+                                    <option value="by-jamaat">By Jamaat</option>
+                                    <option value="missed">Missed</option>
+                                    <option value="qaza">Qaza</option>
+                                </select>
+                            </td>
+                            <td class="px-6 py-4 text-center">
+                                <select class="px-3 py-1 bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-600 rounded text-sm text-slate-800 dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-transparent">
+                                    <option value="on-time" selected>On Time</option>
+                                    <option value="by-jamaat">By Jamaat</option>
+                                    <option value="missed">Missed</option>
+                                    <option value="qaza">Qaza</option>
+                                </select>
+                            </td>
+                        </tr>
+
+                        <!-- Row 4 -->
+                        <tr class="hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors duration-200">
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="text-sm font-medium text-slate-900 dark:text-white">19th July 2025</div>
+                                <div class="text-sm text-slate-500 dark:text-slate-400">4 days ago</div>
+                            </td>
+                            <td class="px-6 py-4 text-center">
+                                <select class="px-3 py-1 bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-600 rounded text-sm text-slate-800 dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-transparent">
+                                    <option value="on-time">On Time</option>
+                                    <option value="by-jamaat">By Jamaat</option>
+                                    <option value="missed" selected>Missed</option>
+                                    <option value="qaza">Qaza</option>
+                                </select>
+                            </td>
+                            <td class="px-6 py-4 text-center">
+                                <select class="px-3 py-1 bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-600 rounded text-sm text-slate-800 dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-transparent">
+                                    <option value="on-time" selected>On Time</option>
+                                    <option value="by-jamaat">By Jamaat</option>
+                                    <option value="missed">Missed</option>
+                                    <option value="qaza">Qaza</option>
+                                </select>
+                            </td>
+                            <td class="px-6 py-4 text-center">
+                                <select class="px-3 py-1 bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-600 rounded text-sm text-slate-800 dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-transparent">
+                                    <option value="on-time" selected>On Time</option>
+                                    <option value="by-jamaat">By Jamaat</option>
+                                    <option value="missed">Missed</option>
+                                    <option value="qaza">Qaza</option>
+                                </select>
+                            </td>
+                            <td class="px-6 py-4 text-center">
+                                <select class="px-3 py-1 bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-600 rounded text-sm text-slate-800 dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-transparent">
+                                    <option value="on-time">On Time</option>
+                                    <option value="by-jamaat" selected>By Jamaat</option>
+                                    <option value="missed">Missed</option>
+                                    <option value="qaza">Qaza</option>
+                                </select>
+                            </td>
+                            <td class="px-6 py-4 text-center">
+                                <select class="px-3 py-1 bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-600 rounded text-sm text-slate-800 dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-transparent">
+                                    <option value="on-time">On Time</option>
+                                    <option value="by-jamaat">By Jamaat</option>
+                                    <option value="missed">Missed</option>
+                                    <option value="qaza" selected>Qaza</option>
+                                </select>
+                            </td>
+                        </tr>
+
+                        <!-- Row 5 -->
+                        <tr class="hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors duration-200">
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="text-sm font-medium text-slate-900 dark:text-white">18th July 2025</div>
+                                <div class="text-sm text-slate-500 dark:text-slate-400">5 days ago</div>
+                            </td>
+                            <td class="px-6 py-4 text-center">
+                                <select class="px-3 py-1 bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-600 rounded text-sm text-slate-800 dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-transparent">
+                                    <option value="on-time" selected>On Time</option>
+                                    <option value="by-jamaat">By Jamaat</option>
+                                    <option value="missed">Missed</option>
+                                    <option value="qaza">Qaza</option>
+                                </select>
+                            </td>
+                            <td class="px-6 py-4 text-center">
+                                <select class="px-3 py-1 bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-600 rounded text-sm text-slate-800 dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-transparent">
+                                    <option value="on-time" selected>On Time</option>
+                                    <option value="by-jamaat">By Jamaat</option>
+                                    <option value="missed">Missed</option>
+                                    <option value="qaza">Qaza</option>
+                                </select>
+                            </td>
+                            <td class="px-6 py-4 text-center">
+                                <select class="px-3 py-1 bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-600 rounded text-sm text-slate-800 dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-transparent">
+                                    <option value="on-time" selected>On Time</option>
+                                    <option value="by-jamaat">By Jamaat</option>
+                                    <option value="missed">Missed</option>
+                                    <option value="qaza">Qaza</option>
+                                </select>
+                            </td>
+                            <td class="px-6 py-4 text-center">
+                                <select class="px-3 py-1 bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-600 rounded text-sm text-slate-800 dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-transparent">
+                                    <option value="on-time" selected>On Time</option>
+                                    <option value="by-jamaat">By Jamaat</option>
+                                    <option value="missed">Missed</option>
+                                    <option value="qaza">Qaza</option>
+                                </select>
+                            </td>
+                            <td class="px-6 py-4 text-center">
+                                <select class="px-3 py-1 bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-600 rounded text-sm text-slate-800 dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-transparent">
+                                    <option value="on-time" selected>On Time</option>
+                                    <option value="by-jamaat">By Jamaat</option>
+                                    <option value="missed">Missed</option>
+                                    <option value="qaza">Qaza</option>
+                                </select>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Table Footer -->
+            <div class="bg-slate-50 dark:bg-slate-700 px-6 py-4 border-t border-slate-200 dark:border-slate-600">
+                <div class="flex items-center justify-between">
+                    <p class="text-sm text-slate-600 dark:text-slate-400">
+                        Showing recent 5 days of prayer records
+                    </p>
+                    <button class="text-primary-500 hover:text-primary-600 text-sm font-medium transition-colors duration-200">
+                        Load More
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quick Navigation -->
+        <div class="mt-8 text-center">
+            <a href="dashboard.html" class="inline-flex items-center text-primary-500 hover:text-primary-600 font-medium transition-colors duration-200">
+                <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                </svg>
+                <span>Back to Dashboard</span>
+            </a>
+        </div>
+    </div>
+
+    <script>
+        function toggleDarkMode() {
+            const html = document.documentElement;
+            html.classList.toggle('dark');
+            localStorage.setItem('darkMode', html.classList.contains('dark'));
+        }
+
+        // Load saved theme
+        if (localStorage.getItem('darkMode') === 'true') {
+            document.documentElement.classList.add('dark');
+        }
+    </script>
+</body>
+</html>

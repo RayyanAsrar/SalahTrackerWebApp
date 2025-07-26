@@ -5,6 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Salah Tracker - Prayer History</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/moment@2.29.4/moment.min.js"></script>
+    <style>
+  @keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+  }
+
+  .animate-fade-in {
+    animation: fadeIn 0.4s ease-out forwards;
+  }
+</style>
+
+
     <script>
         tailwind.config = {
             darkMode: 'class',
@@ -61,6 +74,15 @@
     </style>
 </head>
 <body class="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 dark:from-slate-900 dark:to-slate-800 transition-colors duration-300">
+    <div id="fullscreen-loader" class="fixed inset-0 z-50 flex items-center justify-center bg-white dark:bg-slate-900">
+  <div class="flex flex-col items-center gap-3">
+    <svg class="animate-spin h-10 w-10 text-slate-600 dark:text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+      <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+      <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path>
+    </svg>
+    <p class="text-sm text-slate-500 dark:text-slate-300">Fetching your data, please wait...</p>
+  </div>
+</div>
     <!-- Navigation Bar -->
     <nav class="bg-white dark:bg-slate-800 shadow-lg border-b border-slate-200 dark:border-slate-700 animate-slide-in-down">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -76,8 +98,8 @@
                 <!-- Right: User Info and Sign Out -->
                 <div class="flex items-center space-x-4">
                     <div class="text-right">
-                        <p class="text-sm font-medium text-slate-800 dark:text-white">Ahmed Ali</p>
-                        <p class="text-xs text-slate-500 dark:text-slate-400">ahmed@example.com</p>
+                        <p id="display-name" class="text-sm font-medium text-slate-800 dark:text-white">Ahmed Ali</p>
+                        <p id="display-email" class="text-xs text-slate-500 dark:text-slate-400">ahmed@example.com</p>
                     </div>
                     <button class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-200">
                         Sign Out
@@ -88,7 +110,7 @@
     </nav>
 
     <!-- Main Content -->
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div  id="main-content"  class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 hidden animate-fade-in">
         <!-- Page Header -->
         <div class="mb-8 animate-fade-in-up">
             <div class="bg-gradient-to-r from-primary-500 to-primary-600 rounded-xl px-6 py-4 shadow-lg">
@@ -117,246 +139,9 @@
                             <th class="px-6 py-4 text-center text-xs font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wider">Isha</th>
                         </tr>
                     </thead>
-                    <tbody class="divide-y divide-slate-200 dark:divide-slate-600">
-                        <!-- Row 1 -->
-                        <tr class="hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors duration-200">
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <div class="text-sm font-medium text-slate-900 dark:text-white">22nd July 2025</div>
-                                <div class="text-sm text-slate-500 dark:text-slate-400">Yesterday</div>
-                            </td>
-                            <td class="px-6 py-4 text-center">
-                                <select class="px-3 py-1 bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-600 rounded text-sm text-slate-800 dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-transparent">
-                                    <option value="on-time" selected>On Time</option>
-                                    <option value="by-jamaat">By Jamaat</option>
-                                    <option value="missed">Missed</option>
-                                    <option value="qaza">Qaza</option>
-                                </select>
-                            </td>
-                            <td class="px-6 py-4 text-center">
-                                <select class="px-3 py-1 bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-600 rounded text-sm text-slate-800 dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-transparent">
-                                    <option value="on-time">On Time</option>
-                                    <option value="by-jamaat" selected>By Jamaat</option>
-                                    <option value="missed">Missed</option>
-                                    <option value="qaza">Qaza</option>
-                                </select>
-                            </td>
-                            <td class="px-6 py-4 text-center">
-                                <select class="px-3 py-1 bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-600 rounded text-sm text-slate-800 dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-transparent">
-                                    <option value="on-time" selected>On Time</option>
-                                    <option value="by-jamaat">By Jamaat</option>
-                                    <option value="missed">Missed</option>
-                                    <option value="qaza">Qaza</option>
-                                </select>
-                            </td>
-                            <td class="px-6 py-4 text-center">
-                                <select class="px-3 py-1 bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-600 rounded text-sm text-slate-800 dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-transparent">
-                                    <option value="on-time">On Time</option>
-                                    <option value="by-jamaat" selected>By Jamaat</option>
-                                    <option value="missed">Missed</option>
-                                    <option value="qaza">Qaza</option>
-                                </select>
-                            </td>
-                            <td class="px-6 py-4 text-center">
-                                <select class="px-3 py-1 bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-600 rounded text-sm text-slate-800 dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-transparent">
-                                    <option value="on-time">On Time</option>
-                                    <option value="by-jamaat">By Jamaat</option>
-                                    <option value="missed" selected>Missed</option>
-                                    <option value="qaza">Qaza</option>
-                                </select>
-                            </td>
-                        </tr>
-
-                        <!-- Row 2 -->
-                        <tr class="hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors duration-200">
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <div class="text-sm font-medium text-slate-900 dark:text-white">21st July 2025</div>
-                                <div class="text-sm text-slate-500 dark:text-slate-400">2 days ago</div>
-                            </td>
-                            <td class="px-6 py-4 text-center">
-                                <select class="px-3 py-1 bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-600 rounded text-sm text-slate-800 dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-transparent">
-                                    <option value="on-time">On Time</option>
-                                    <option value="by-jamaat" selected>By Jamaat</option>
-                                    <option value="missed">Missed</option>
-                                    <option value="qaza">Qaza</option>
-                                </select>
-                            </td>
-                            <td class="px-6 py-4 text-center">
-                                <select class="px-3 py-1 bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-600 rounded text-sm text-slate-800 dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-transparent">
-                                    <option value="on-time" selected>On Time</option>
-                                    <option value="by-jamaat">By Jamaat</option>
-                                    <option value="missed">Missed</option>
-                                    <option value="qaza">Qaza</option>
-                                </select>
-                            </td>
-                            <td class="px-6 py-4 text-center">
-                                <select class="px-3 py-1 bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-600 rounded text-sm text-slate-800 dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-transparent">
-                                    <option value="on-time" selected>On Time</option>
-                                    <option value="by-jamaat">By Jamaat</option>
-                                    <option value="missed">Missed</option>
-                                    <option value="qaza">Qaza</option>
-                                </select>
-                            </td>
-                            <td class="px-6 py-4 text-center">
-                                <select class="px-3 py-1 bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-600 rounded text-sm text-slate-800 dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-transparent">
-                                    <option value="on-time" selected>On Time</option>
-                                    <option value="by-jamaat">By Jamaat</option>
-                                    <option value="missed">Missed</option>
-                                    <option value="qaza">Qaza</option>
-                                </select>
-                            </td>
-                            <td class="px-6 py-4 text-center">
-                                <select class="px-3 py-1 bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-600 rounded text-sm text-slate-800 dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-transparent">
-                                    <option value="on-time">On Time</option>
-                                    <option value="by-jamaat">By Jamaat</option>
-                                    <option value="missed">Missed</option>
-                                    <option value="qaza" selected>Qaza</option>
-                                </select>
-                            </td>
-                        </tr>
-
-                        <!-- Row 3 -->
-                        <tr class="hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors duration-200">
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <div class="text-sm font-medium text-slate-900 dark:text-white">20th July 2025</div>
-                                <div class="text-sm text-slate-500 dark:text-slate-400">3 days ago</div>
-                            </td>
-                            <td class="px-6 py-4 text-center">
-                                <select class="px-3 py-1 bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-600 rounded text-sm text-slate-800 dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-transparent">
-                                    <option value="on-time" selected>On Time</option>
-                                    <option value="by-jamaat">By Jamaat</option>
-                                    <option value="missed">Missed</option>
-                                    <option value="qaza">Qaza</option>
-                                </select>
-                            </td>
-                            <td class="px-6 py-4 text-center">
-                                <select class="px-3 py-1 bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-600 rounded text-sm text-slate-800 dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-transparent">
-                                    <option value="on-time">On Time</option>
-                                    <option value="by-jamaat" selected>By Jamaat</option>
-                                    <option value="missed">Missed</option>
-                                    <option value="qaza">Qaza</option>
-                                </select>
-                            </td>
-                            <td class="px-6 py-4 text-center">
-                                <select class="px-3 py-1 bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-600 rounded text-sm text-slate-800 dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-transparent">
-                                    <option value="on-time">On Time</option>
-                                    <option value="by-jamaat" selected>By Jamaat</option>
-                                    <option value="missed">Missed</option>
-                                    <option value="qaza">Qaza</option>
-                                </select>
-                            </td>
-                            <td class="px-6 py-4 text-center">
-                                <select class="px-3 py-1 bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-600 rounded text-sm text-slate-800 dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-transparent">
-                                    <option value="on-time" selected>On Time</option>
-                                    <option value="by-jamaat">By Jamaat</option>
-                                    <option value="missed">Missed</option>
-                                    <option value="qaza">Qaza</option>
-                                </select>
-                            </td>
-                            <td class="px-6 py-4 text-center">
-                                <select class="px-3 py-1 bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-600 rounded text-sm text-slate-800 dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-transparent">
-                                    <option value="on-time" selected>On Time</option>
-                                    <option value="by-jamaat">By Jamaat</option>
-                                    <option value="missed">Missed</option>
-                                    <option value="qaza">Qaza</option>
-                                </select>
-                            </td>
-                        </tr>
-
-                        <!-- Row 4 -->
-                        <tr class="hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors duration-200">
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <div class="text-sm font-medium text-slate-900 dark:text-white">19th July 2025</div>
-                                <div class="text-sm text-slate-500 dark:text-slate-400">4 days ago</div>
-                            </td>
-                            <td class="px-6 py-4 text-center">
-                                <select class="px-3 py-1 bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-600 rounded text-sm text-slate-800 dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-transparent">
-                                    <option value="on-time">On Time</option>
-                                    <option value="by-jamaat">By Jamaat</option>
-                                    <option value="missed" selected>Missed</option>
-                                    <option value="qaza">Qaza</option>
-                                </select>
-                            </td>
-                            <td class="px-6 py-4 text-center">
-                                <select class="px-3 py-1 bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-600 rounded text-sm text-slate-800 dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-transparent">
-                                    <option value="on-time" selected>On Time</option>
-                                    <option value="by-jamaat">By Jamaat</option>
-                                    <option value="missed">Missed</option>
-                                    <option value="qaza">Qaza</option>
-                                </select>
-                            </td>
-                            <td class="px-6 py-4 text-center">
-                                <select class="px-3 py-1 bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-600 rounded text-sm text-slate-800 dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-transparent">
-                                    <option value="on-time" selected>On Time</option>
-                                    <option value="by-jamaat">By Jamaat</option>
-                                    <option value="missed">Missed</option>
-                                    <option value="qaza">Qaza</option>
-                                </select>
-                            </td>
-                            <td class="px-6 py-4 text-center">
-                                <select class="px-3 py-1 bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-600 rounded text-sm text-slate-800 dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-transparent">
-                                    <option value="on-time">On Time</option>
-                                    <option value="by-jamaat" selected>By Jamaat</option>
-                                    <option value="missed">Missed</option>
-                                    <option value="qaza">Qaza</option>
-                                </select>
-                            </td>
-                            <td class="px-6 py-4 text-center">
-                                <select class="px-3 py-1 bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-600 rounded text-sm text-slate-800 dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-transparent">
-                                    <option value="on-time">On Time</option>
-                                    <option value="by-jamaat">By Jamaat</option>
-                                    <option value="missed">Missed</option>
-                                    <option value="qaza" selected>Qaza</option>
-                                </select>
-                            </td>
-                        </tr>
-
-                        <!-- Row 5 -->
-                        <tr class="hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors duration-200">
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <div class="text-sm font-medium text-slate-900 dark:text-white">18th July 2025</div>
-                                <div class="text-sm text-slate-500 dark:text-slate-400">5 days ago</div>
-                            </td>
-                            <td class="px-6 py-4 text-center">
-                                <select class="px-3 py-1 bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-600 rounded text-sm text-slate-800 dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-transparent">
-                                    <option value="on-time" selected>On Time</option>
-                                    <option value="by-jamaat">By Jamaat</option>
-                                    <option value="missed">Missed</option>
-                                    <option value="qaza">Qaza</option>
-                                </select>
-                            </td>
-                            <td class="px-6 py-4 text-center">
-                                <select class="px-3 py-1 bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-600 rounded text-sm text-slate-800 dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-transparent">
-                                    <option value="on-time" selected>On Time</option>
-                                    <option value="by-jamaat">By Jamaat</option>
-                                    <option value="missed">Missed</option>
-                                    <option value="qaza">Qaza</option>
-                                </select>
-                            </td>
-                            <td class="px-6 py-4 text-center">
-                                <select class="px-3 py-1 bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-600 rounded text-sm text-slate-800 dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-transparent">
-                                    <option value="on-time" selected>On Time</option>
-                                    <option value="by-jamaat">By Jamaat</option>
-                                    <option value="missed">Missed</option>
-                                    <option value="qaza">Qaza</option>
-                                </select>
-                            </td>
-                            <td class="px-6 py-4 text-center">
-                                <select class="px-3 py-1 bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-600 rounded text-sm text-slate-800 dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-transparent">
-                                    <option value="on-time" selected>On Time</option>
-                                    <option value="by-jamaat">By Jamaat</option>
-                                    <option value="missed">Missed</option>
-                                    <option value="qaza">Qaza</option>
-                                </select>
-                            </td>
-                            <td class="px-6 py-4 text-center">
-                                <select class="px-3 py-1 bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-600 rounded text-sm text-slate-800 dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-transparent">
-                                    <option value="on-time" selected>On Time</option>
-                                    <option value="by-jamaat">By Jamaat</option>
-                                    <option value="missed">Missed</option>
-                                    <option value="qaza">Qaza</option>
-                                </select>
-                            </td>
-                        </tr>
+                    <tbody id="history-table-body" class="divide-y divide-slate-200 dark:divide-slate-600">
+                       
+                        
                     </tbody>
                 </table>
             </div>
@@ -397,5 +182,6 @@
             document.documentElement.classList.add('dark');
         }
     </script>
+    <script type="module" src="../js/history.js"></script>
 </body>
 </html>

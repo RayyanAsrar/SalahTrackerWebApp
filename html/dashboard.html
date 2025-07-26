@@ -58,6 +58,17 @@
     </style>
 </head>
 <body class="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 dark:from-slate-900 dark:to-slate-800 transition-colors duration-300">
+    <!-- Full Page Loader -->
+<div id="fullscreen-loader" class="fixed inset-0 z-50 flex items-center justify-center bg-white dark:bg-slate-900">
+  <div class="flex flex-col items-center gap-3">
+    <svg class="animate-spin h-10 w-10 text-slate-600 dark:text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+      <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+      <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path>
+    </svg>
+    <p class="text-sm text-slate-500 dark:text-slate-300">Fetching your data, please wait...</p>
+  </div>    
+</div>
+    
     <!-- Navigation Bar -->
     <nav class="bg-white dark:bg-slate-800 shadow-lg border-b border-slate-200 dark:border-slate-700 animate-slide-in-down">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -73,10 +84,10 @@
                 <!-- Right: User Info and Sign Out -->
                 <div class="flex items-center space-x-4">
                     <div class="text-right">
-                        <p class="text-sm font-medium text-slate-800 dark:text-white">Ahmed Ali</p>
-                        <p class="text-xs text-slate-500 dark:text-slate-400">ahmed@example.com</p>
+                        <p id="display-email" class="text-xs text-slate-500 dark:text-slate-400"></p>
+                        <p id="display-name" class="text-sm font-medium text-slate-800 dark:text-white"></p>
                     </div>
-                    <button class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-200">
+                    <button id="signOutBtn" class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-200">
                         Sign Out
                     </button>
                 </div>
@@ -91,7 +102,7 @@
             <!-- Card Header -->
             <div class="bg-gradient-to-r from-primary-500 to-primary-600 rounded-t-2xl px-6 py-4">
                 <h2 class="text-xl font-semibold text-white text-center">
-                    Mark Your Today's Prayer – 23rd July 2025
+                    Mark Your Today's Prayer – <span id="today-date">Loading...</span>
                 </h2>
             </div>
             
@@ -105,7 +116,7 @@
                             <span class="font-medium text-slate-800 dark:text-white">Fajr</span>
                             <span class="text-sm text-slate-500 dark:text-slate-400">(Dawn)</span>
                         </div>
-                        <select class="px-3 py-2 bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-600 rounded-lg text-slate-800 dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-200">
+                        <select id="fajr-select" class="px-3 py-2 bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-600 rounded-lg text-slate-800 dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-200">
                             <option value="">Select Status</option>
                             <option value="on-time">On Time</option>
                             <option value="by-jamaat">By Jamaat</option>
@@ -121,7 +132,7 @@
                             <span class="font-medium text-slate-800 dark:text-white">Dhuhr</span>
                             <span class="text-sm text-slate-500 dark:text-slate-400">(Noon)</span>
                         </div>
-                        <select class="px-3 py-2 bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-600 rounded-lg text-slate-800 dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-200">
+                        <select id="dhuhr-select" class="px-3 py-2 bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-600 rounded-lg text-slate-800 dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-200">
                             <option value="">Select Status</option>
                             <option value="on-time">On Time</option>
                             <option value="by-jamaat">By Jamaat</option>
@@ -137,7 +148,7 @@
                             <span class="font-medium text-slate-800 dark:text-white">Asr</span>
                             <span class="text-sm text-slate-500 dark:text-slate-400">(Afternoon)</span>
                         </div>
-                        <select class="px-3 py-2 bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-600 rounded-lg text-slate-800 dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-200">
+                        <select id="asr-select" class="px-3 py-2 bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-600 rounded-lg text-slate-800 dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-200">
                             <option value="">Select Status</option>
                             <option value="on-time">On Time</option>
                             <option value="by-jamaat">By Jamaat</option>
@@ -153,7 +164,7 @@
                             <span class="font-medium text-slate-800 dark:text-white">Maghrib</span>
                             <span class="text-sm text-slate-500 dark:text-slate-400">(Sunset)</span>
                         </div>
-                        <select class="px-3 py-2 bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-600 rounded-lg text-slate-800 dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-200">
+                        <select  id="maghrib-select" class="px-3 py-2 bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-600 rounded-lg text-slate-800 dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-200">
                             <option value="">Select Status</option>
                             <option value="on-time">On Time</option>
                             <option value="by-jamaat">By Jamaat</option>
@@ -169,7 +180,7 @@
                             <span class="font-medium text-slate-800 dark:text-white">Isha</span>
                             <span class="text-sm text-slate-500 dark:text-slate-400">(Night)</span>
                         </div>
-                        <select class="px-3 py-2 bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-600 rounded-lg text-slate-800 dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-200">
+                        <select id="isha-select" class="px-3 py-2 bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-600 rounded-lg text-slate-800 dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-200">
                             <option value="">Select Status</option>
                             <option value="on-time">On Time</option>
                             <option value="by-jamaat">By Jamaat</option>
@@ -211,5 +222,6 @@
             document.documentElement.classList.add('dark');
         }
     </script>
+    <script type="module" src="../js/app.js"></script>
 </body>
 </html>
